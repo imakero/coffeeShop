@@ -78,7 +78,16 @@ class Customer {
     memberStatus.innerText = `Medlemskapsstatus: ${this.calculateTotalCups()}`
   }
 
-
+  displayMemberStatusName(){
+    const totalCups = this.calculateTotalCups()
+    if (totalCups < 10){
+      memberStatus.innerText = `Medlemskapsstatus: Brons`
+    } else if (totalCups < 30) {
+      memberStatus.innerText = `Medlemskapsstatus: Silver`
+    } else {
+      memberStatus.innerText = `Medlemskapsstatus: Guld`
+    }
+  }
 }
 
 
@@ -91,12 +100,15 @@ function onSubmit(event) {
 
   const quantityInput = document.getElementById('coffee-input')
   const quantity = parseInt(quantityInput.value)
+  if (quantity > 0) {
+    customer.addTransaction(coffeeId, quantity)
 
-  customer.addTransaction(coffeeId, quantity)
-
-  customer.displayTotalSpent()
-
-  customer.displayMemberStatus()
+    customer.displayTotalSpent()
+  
+    customer.displayMemberStatusName()
+  } else {
+    
+  }
 }
 
 const customer = new Customer()
