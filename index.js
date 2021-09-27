@@ -34,6 +34,7 @@ class Customer {
     }
 
     this.transactions.push(transaction)
+    console.log(this.transactions)
     this.displayTransaction(transaction)
   }
 
@@ -51,6 +52,15 @@ class Customer {
 
     transactionsContainer.appendChild(transactionElement)
   }
+
+  calculateTotalSpent(){
+    let sum = 0
+    this.transactions.forEach((transaction) => {
+      const transactionTotal = this.transactionTotalPrice(transaction)
+      sum += transactionTotal
+    })  
+    return sum
+  }
 }
 
 function onSubmit(event) {
@@ -63,6 +73,7 @@ function onSubmit(event) {
   const quantity = parseInt(quantityInput.value)
 
   customer.addTransaction(coffeeId, quantity)
+ 
 }
 
 const customer = new Customer()
