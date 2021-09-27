@@ -61,7 +61,13 @@ class Customer {
     })  
     return sum
   }
+
+  displayTotalSpent(){
+    totalSpent.innerText = `Du har handlat för ${this.calculateTotalSpent()} kr`
+  }
 }
+
+
 
 function onSubmit(event) {
   event.preventDefault()
@@ -73,7 +79,8 @@ function onSubmit(event) {
   const quantity = parseInt(quantityInput.value)
 
   customer.addTransaction(coffeeId, quantity)
- 
+
+  customer.displayTotalSpent(totalSpent)
 }
 
 const customer = new Customer()
