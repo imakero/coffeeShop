@@ -65,6 +65,20 @@ class Customer {
   displayTotalSpent(){
     totalSpent.innerText = `Du har handlat för ${this.calculateTotalSpent()} kr`
   }
+
+  calculateTotalCups(){
+    let totalCups = 0
+    this.transactions.forEach((transaction) => {
+      totalCups += transaction.quantity
+    })
+    return totalCups
+  }
+
+  displayMemberStatus(){
+    memberStatus.innerText = `Medlemskapsstatus: ${this.calculateTotalCups()}`
+  }
+
+
 }
 
 
@@ -80,7 +94,9 @@ function onSubmit(event) {
 
   customer.addTransaction(coffeeId, quantity)
 
-  customer.displayTotalSpent(totalSpent)
+  customer.displayTotalSpent()
+
+  customer.displayMemberStatus()
 }
 
 const customer = new Customer()
