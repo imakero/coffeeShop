@@ -21,8 +21,6 @@ coffees.forEach((coffee, index) => {
 
 class Customer {
   constructor() {
-    this.totalSpent = 0
-    this.memberStatus = ''
     this.transactions = []
   }
 
@@ -34,7 +32,6 @@ class Customer {
     }
 
     this.transactions.push(transaction)
-    console.log(this.transactions)
     this.displayTransaction(transaction)
   }
 
@@ -107,7 +104,7 @@ function onSubmit(event) {
   
     customer.displayMemberStatusName()
   } else {
-    
+
   }
 }
 
