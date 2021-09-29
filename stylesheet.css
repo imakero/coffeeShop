@@ -1,0 +1,13 @@
+#error-message {
+    color: red;
+}
+.status-bronze {
+    color: sandybrown;
+}
+.status-silver {
+    color: silver;
+}
+.status-gold {
+    color: gold;
+}
+

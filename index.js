@@ -73,7 +73,7 @@ class Customer {
   }
 
   displayTotalSpent() {
-    totalSpent.innerText = `Du har handlat för ${this.calculateTotalSpent()} kr`
+    totalSpent.innerText = `Du har handlat ${this.calculateTotalCups()} koppar för ${this.calculateTotalSpent()} kr`
   }
 
   calculateTotalCups() {
@@ -87,11 +87,11 @@ class Customer {
   displayMemberStatus() {
     const totalCups = this.calculateTotalCups()
     if (totalCups < 10) {
-      memberStatus.innerText = `Medlemskapsstatus: Brons`
+      memberStatus.innerHTML = `Medlemskapsstatus: <span class="status-bronze">Brons</span>`
     } else if (totalCups < 30) {
-      memberStatus.innerText = `Medlemskapsstatus: Silver`
+      memberStatus.innerHTML = `Medlemskapsstatus: <span class="status-silver">Silver</span>`
     } else {
-      memberStatus.innerText = `Medlemskapsstatus: Guld`
+      memberStatus.innerHTML = `Medlemskapsstatus: <span class="status-gold">Guld</span>`
     }
   }
 
