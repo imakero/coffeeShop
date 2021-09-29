@@ -28,14 +28,14 @@ class Customer {
     this.discount = 1
   }
 
+
   addTransaction(coffeeId, quantity) {
+    this.updateDiscount()
     const transaction = {
       name: coffees[coffeeId].name,
-      price: coffees[coffeeId].price,
+      price: coffees[coffeeId].price * this.discount,
       quantity: quantity,
     }
-
-    this.updateDiscount()
 
     //console.log(JSON.stringify(this.transactions, null, 2))
     this.transactions.push(transaction)
@@ -50,7 +50,6 @@ class Customer {
     } else if (total >= 1000){
       this.discount = 0.85
     }
-    console.log(this.discount)
   }
 
   displayTransaction(transaction) {
