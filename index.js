@@ -5,7 +5,8 @@ const coffees = [
 ]
 
 const errorMessage = document.getElementById('error-message')
-const coffeSelect = document.getElementById('coffee-select')
+const coffeeSelect = document.getElementById('coffee-select')
+const quantityInput = document.getElementById('coffee-input')
 const totalSpent = document.getElementById('total-spent')
 const memberStatus = document.getElementById('member-status')
 const transactionsContainer = document.getElementById('transactions-container')
@@ -13,13 +14,11 @@ const coffeeForm = document.getElementById('coffee-form')
 const transactionTitle = document.getElementById('transaction-title')
 const discountMessage = document.getElementById('discount-message')
 
-coffeeForm.addEventListener('submit', onSubmit)
-
 coffees.forEach((coffee, index) => {
-  const coffeeOption = document.createElement('option') //<option></option>
-  coffeeOption.innerText = `${coffee.name} - ${coffee.price} kr` //<option>Bryggkaffe - 20 kr</option>
-  coffeeOption.value = index //<option value="0">Bryggkaffe - 20 kr</option>
-  coffeSelect.appendChild(coffeeOption)
+  const coffeeOption = document.createElement('option')
+  coffeeOption.innerText = `${coffee.name} - ${coffee.price} kr`
+  coffeeOption.value = index
+  coffeeSelect.appendChild(coffeeOption)
 })
 
 class Customer {
@@ -27,7 +26,6 @@ class Customer {
     this.transactions = []
     this.discount = 1
   }
-
 
   addTransaction(coffeeId, quantity) {
     this.updateDiscount()
@@ -37,17 +35,15 @@ class Customer {
       quantity: quantity,
     }
 
-    //console.log(JSON.stringify(this.transactions, null, 2))
     this.transactions.push(transaction)
-    //console.log(JSON.stringify(this.transactions, null, 2))
     this.displayTransaction(transaction)
   }
 
   updateDiscount() {
     const total = this.calculateTotalSpent()
-    if (total >= 500 && total < 1000){
+    if (total >= 500 && total < 1000) {
       this.discount = 0.9
-    } else if (total >= 1000){
+    } else if (total >= 1000) {
       this.discount = 0.85
     }
   }
@@ -95,23 +91,22 @@ class Customer {
     }
   }
 
-  displayDiscountMessage(){
+  displayDiscountMessage() {
     const total = this.calculateTotalSpent()
-    if (total >= 500 && total < 1000){
+    if (total >= 500 && total < 1000) {
       discountMessage.innerText = `Du har 10% rabatt`
-    } else if (total >= 1000){
+    } else if (total >= 1000) {
       discountMessage.innerText = `Du har 15% rabatt`
     }
   }
 }
 
+coffeeForm.addEventListener('submit', onSubmit)
+
 function onSubmit(event) {
   event.preventDefault()
 
-  const coffeeTypeSelect = document.getElementById('coffee-select')
-  const coffeeId = parseInt(coffeeTypeSelect.value) //Because value is of type string
-
-  const quantityInput = document.getElementById('coffee-input')
+  const coffeeId = parseInt(coffeeSelect.value)
   const quantity = parseInt(quantityInput.value)
 
   if (quantity > 0 && quantity <= 10) {
@@ -121,11 +116,13 @@ function onSubmit(event) {
     customer.displayDiscountMessage()
     errorMessage.innerText = ``
     transactionTitle.innerText = `Dina Transaktioner`
-    
-
-  } else if ( quantity > 10) {
-    errorMessage.innerText = `Du får inte köpa mer än 10 koppar samtidigt`
+  } else if (quantity > 10) {
+    errorMessage.innerText = `Du får inte köpa mer än 10 koppar samtidigt!`
+  } else if (quantity < 1) {
+    errorMessage.innerText = `Du måste köpa minst 1 kopp!`
   }
 }
+
+function displayError(quantity) {}
 
 const customer = new Customer()
