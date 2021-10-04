@@ -123,6 +123,4 @@ function onSubmit(event) {
   }
 }
 
-function displayError(quantity) {}
-
 const customer = new Customer()
